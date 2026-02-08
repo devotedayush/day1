@@ -1,314 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌹 OPERATION: ROSE DROP 🌹</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
-        .bungee { font-family: 'Bungee', cursive; }
-        
-        .floating-rose {
-            position: fixed;
-            pointer-events: none;
-            z-index: 50;
-            animation: float 3s ease-in-out infinite;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📋 Annoyance Subscription · For Bauni Badmash</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Caveat:wght@400;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#faf8f5;--text:#2c2c2c;--muted:#8a8580;
+--accent:#e07850;--soft:#f0ebe4;--warm:#d4a574;
+--ink:#3d3530;--paper:#f5f1ec;--tag:#eee8df;
+}
+html{scroll-behavior:smooth}
+body{
+background:var(--bg);color:var(--text);
+font-family:'Outfit',sans-serif;font-weight:400;
+overflow-x:hidden;line-height:1.7;
+}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(20deg); }
-        }
+body::before{
+content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+pointer-events:none;z-index:1000;
+}
 
-        .shake {
-            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-        }
+/* ===== LANDING ===== */
+.landing{
+height:100vh;display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+background:var(--bg);position:relative;z-index:2;
+}
+.envelope-wrap{cursor:pointer;position:relative;animation:boop 3s ease-in-out infinite}
+@keyframes boop{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-8px) rotate(-1deg)}75%{transform:translateY(-4px) rotate(1deg)}}
 
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
-        }
+.envelope{
+width:260px;height:180px;
+background:var(--paper);
+border:2px solid var(--tag);
+border-radius:6px;position:relative;
+box-shadow:0 8px 30px rgba(0,0,0,0.06);
+transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+.envelope:hover{transform:scale(1.06)}
+.envelope::before{
+content:'';position:absolute;top:0;left:0;
+border-style:solid;border-width:90px 130px 0;
+border-color:var(--tag) transparent transparent;
+border-radius:6px 6px 0 0;
+}
+.envelope-stamp{
+position:absolute;top:12px;right:12px;z-index:2;
+width:45px;height:50px;background:var(--soft);
+border:1px dashed var(--muted);border-radius:2px;
+display:flex;align-items:center;justify-content:center;
+font-size:22px;
+}
+.envelope-label{
+position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;
+font-family:'Caveat',cursive;font-size:1.1rem;color:var(--muted);
+white-space:nowrap;
+}
+.landing-hint{
+margin-top:35px;font-size:0.85rem;color:var(--muted);
+letter-spacing:2px;text-transform:uppercase;
+animation:fadeUp 1.5s ease 0.5s both;
+}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(15px)}100%{opacity:1;transform:translateY(0)}}
 
-        .neon-border {
-            box-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055, 0 0 30px #ff0055;
-        }
+.landing-cat{
+position:absolute;bottom:30px;right:30px;
+width:110px;border-radius:12px;opacity:0.6;
+}
 
-        .glitch-text {
-            text-shadow: 2px 0 #ff0055, -2px 0 #00ffff;
-        }
+/* ===== MAIN ===== */
+.main-content{display:none;opacity:0;transition:opacity 0.8s ease}
+.main-content.visible{display:block;opacity:1}
 
-        .hidden-stage {
-            display: none;
-        }
+/* ===== HERO ===== */
+.hero{
+min-height:90vh;display:flex;align-items:center;justify-content:center;
+padding:60px 24px;text-align:center;position:relative;
+}
+.hero-inner{max-width:620px}
+.hero-tag{
+display:inline-block;padding:6px 18px;background:var(--tag);
+border-radius:50px;font-size:0.75rem;
+letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:28px;
+}
+.hero h1{
+font-family:'DM Serif Display',serif;
+font-size:clamp(2.5rem,6vw,4.2rem);
+line-height:1.15;font-weight:400;color:var(--ink);margin-bottom:12px;
+}
+.hero h1 .name{
+font-family:'Caveat',cursive;
+color:var(--accent);font-size:clamp(3rem,7vw,5.2rem);
+display:block;margin-top:5px;
+}
+.hero-line{width:60px;height:2px;background:var(--tag);margin:28px auto;border-radius:2px}
+.hero p{font-size:0.92rem;color:var(--muted);max-width:500px;margin:0 auto}
 
-        #rose-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
+.hero-gif{
+position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+width:100px;border-radius:14px;opacity:0.7;
+box-shadow:0 4px 15px rgba(0,0,0,0.05);
+}
 
-        .btn-crazy {
-            transition: all 0.2s;
-            background: linear-gradient(45deg, #ff0055, #ff8800);
-        }
+/* ===== SECTION ===== */
+section{padding:80px 24px}
+.section-label{
+font-size:0.7rem;letter-spacing:4px;
+text-transform:uppercase;color:var(--muted);margin-bottom:12px;
+}
 
-        .btn-crazy:hover {
-            transform: scale(1.1) rotate(5deg);
-            filter: brightness(1.2);
-        }
-    </style>
+/* ===== REASONS ===== */
+.reasons{max-width:720px;margin:0 auto;padding:60px 24px 100px}
+.reasons-header{text-align:center;margin-bottom:60px}
+.reasons-header h2{
+font-family:'DM Serif Display',serif;
+font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;color:var(--ink);
+}
+
+.reason{
+display:grid;grid-template-columns:50px 1fr;gap:18px;
+padding:32px 0;border-bottom:1px solid var(--tag);
+opacity:0;transform:translateY(30px);
+transition:opacity 0.7s ease,transform 0.7s ease;
+}
+.reason.in-view{opacity:1;transform:translateY(0)}
+
+.reason-num{
+font-family:'Caveat',cursive;font-size:2.2rem;
+color:var(--accent);opacity:0.45;line-height:1;
+}
+.reason h3{
+font-family:'DM Serif Display',serif;
+font-size:1.1rem;font-weight:400;margin-bottom:8px;color:var(--ink);
+}
+.reason p{font-size:0.88rem;color:var(--muted);line-height:1.8}
+.reason .cat-gif{
+width:100px;border-radius:10px;margin-top:14px;
+opacity:0.85;box-shadow:0 3px 10px rgba(0,0,0,0.05);
+}
+.reason .tag{
+display:inline-block;margin-top:10px;
+padding:3px 12px;background:var(--tag);
+border-radius:20px;font-size:0.72rem;color:var(--muted);
+}
+
+/* ===== PROMISE ===== */
+.promise-section{
+background:var(--paper);
+border-top:1px solid var(--tag);border-bottom:1px solid var(--tag);
+padding:80px 24px;text-align:center;
+}
+.promise-section h2{
+font-family:'DM Serif Display',serif;
+font-size:clamp(1.8rem,4vw,2.5rem);font-weight:400;margin-bottom:30px;color:var(--ink);
+}
+.promise-text{
+max-width:560px;margin:0 auto;font-size:0.92rem;
+color:var(--muted);line-height:2;
+}
+.promise-text em{color:var(--accent);font-style:normal;font-weight:500}
+.promise-cat{
+width:120px;border-radius:14px;margin-top:30px;
+opacity:0.85;box-shadow:0 4px 15px rgba(0,0,0,0.06);
+}
+
+/* ===== QUESTION ===== */
+.question{
+padding:100px 24px;text-align:center;max-width:650px;margin:0 auto;
+}
+.question h2{
+font-family:'DM Serif Display',serif;
+font-size:clamp(2rem,5vw,3rem);font-weight:400;color:var(--ink);margin-bottom:8px;
+}
+.question .subtitle{
+font-family:'Caveat',cursive;font-size:1.3rem;color:var(--accent);margin-bottom:12px;
+}
+.question .fine-print{
+font-size:0.85rem;color:var(--muted);margin-bottom:40px;font-style:italic;
+}
+
+.btn-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-yes{
+padding:16px 44px;background:var(--ink);color:var(--bg);
+border:none;border-radius:50px;font-family:'Outfit',sans-serif;
+font-size:1rem;font-weight:500;cursor:pointer;
+transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+.btn-yes:hover{transform:scale(1.08);background:var(--accent);box-shadow:0 8px 25px rgba(224,120,80,0.25)}
+.btn-no{
+padding:16px 36px;background:transparent;color:var(--muted);
+border:1.5px solid var(--tag);border-radius:50px;
+font-family:'Outfit',sans-serif;font-size:0.9rem;cursor:pointer;
+transition:all 0.3s;
+}
+
+/* ===== CELEBRATION ===== */
+.celebration{
+display:none;position:fixed;top:0;left:0;
+width:100%;height:100%;z-index:200;background:var(--bg);
+flex-direction:column;align-items:center;justify-content:center;
+text-align:center;padding:24px;
+}
+.celebration.active{display:flex}
+.celebration h1{
+font-family:'DM Serif Display',serif;
+font-size:clamp(2.2rem,6vw,4.5rem);font-weight:400;color:var(--ink);margin-bottom:16px;
+}
+.celebration h1 span{color:var(--accent)}
+.celebration p{
+font-size:0.95rem;color:var(--muted);max-width:460px;line-height:1.8;margin-bottom:25px;
+}
+.celebration .cat-celebrate{
+width:160px;border-radius:16px;
+box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:201}
+
+/* ===== FOOTER ===== */
+footer{padding:40px 24px;text-align:center;border-top:1px solid var(--tag)}
+footer p{font-family:'Caveat',cursive;font-size:1.2rem;color:var(--muted)}
+footer .small{
+display:block;margin-top:6px;font-family:'Outfit',sans-serif;
+font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--tag);
+}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--tag);border-radius:3px}
+
+@media(max-width:600px){
+.reason{grid-template-columns:40px 1fr;gap:12px}
+.btn-group{flex-direction:column;align-items:center}
+.landing-cat{width:80px;bottom:15px;right:15px}
+}
+</style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-4 overflow-x-hidden">
+<body>
 
-    <canvas id="rose-canvas"></canvas>
+<!-- ===== LANDING ===== -->
+<section class="landing" id="landing">
+<div class="envelope-wrap" onclick="openEnvelope()">
+<div class="envelope">
+<div class="envelope-stamp">🐱</div>
+<div class="envelope-label">To: Bauni Badmash</div>
+</div>
+</div>
+<p class="landing-hint">tap to open · no refunds</p>
+<img src="https://media1.tenor.com/m/IxHfzAZrDXkAAAAC/swing-grey-cat.gif" class="landing-cat" alt="vibing cat">
+</section>
 
-    <!-- STAGE 1: VERIFICATION -->
-    <div id="stage1" class="text-center space-y-8 max-w-lg">
-        <h1 class="bungee text-5xl md:text-7xl mb-4 glitch-text animate-pulse">STOP!</h1>
-        <div class="bg-zinc-900 p-8 rounded-3xl border-4 border-rose-500 neon-border">
-            <p class="text-xl mb-6 font-bold uppercase tracking-widest">Digital Security Check</p>
-            <p class="text-gray-400 mb-8">This website contains lethal levels of badmoshi. Please verify you are the designated recipient.</p>
-            
-            <button onclick="verify(true)" class="btn-crazy bungee px-8 py-4 rounded-full text-xl mb-4 w-full">
-                I AM THE CUTEST PERSON ALIVE
-            </button>
-            <button id="noBtn" onmouseover="moveButton()" onclick="alert('Nice try, imposter!')" class="bg-zinc-800 text-gray-500 px-8 py-2 rounded-full text-sm w-full opacity-50">
-                I am someone else
-            </button>
-        </div>
-    </div>
+<!-- ===== MAIN ===== -->
+<div class="main-content" id="mainContent">
 
-    <!-- STAGE 2: THE FORGE -->
-    <div id="stage2" class="hidden-stage text-center space-y-8 max-w-2xl w-full">
-        <h2 class="bungee text-4xl text-rose-500">FORGING THE ULTIMATE ROSE</h2>
-        <div class="relative bg-zinc-900 p-8 rounded-3xl border-2 border-white/20">
-            <div class="flex justify-center mb-6">
-                <div id="rose-preview" class="text-8xl transform transition-transform duration-75">🥀</div>
-            </div>
-            <div class="space-y-6">
-                <div class="h-4 w-full bg-zinc-800 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="h-full bg-rose-500 w-0 transition-all duration-300"></div>
-                </div>
-                <p class="text-rose-400 font-mono" id="status-text">ROSE QUALITY: ABYSMAL</p>
-                <button onclick="hitRose()" class="btn-crazy bungee px-12 py-6 rounded-2xl text-2xl w-full shadow-xl active:scale-95">
-                    CLICK TO SMASH LOVE INTO IT!
-                </button>
-            </div>
-        </div>
-        <p class="text-2xl text-rose-500 font-bold animate-pulse uppercase tracking-tighter">
-            ⚠️ WARNING: CLICKING TOO FAST MIGHT CAUSE FEELINGS! ⚠️
-        </p>
-    </div>
+<section class="hero">
+<div class="hero-inner">
+<span class="hero-tag">📋 propose day 2026 · official paperwork</span>
+<h1>
+Hey there,
+<span class="name">Bauni Badmash</span>
+</h1>
+<div class="hero-line"></div>
+<p>This isn't some dramatic, filmy proposal. This is a well-researched, evidence-based case for why we're a ridiculously great match. Please review carefully.</p>
+</div>
+<img src="https://media1.tenor.com/m/GRHQffILwtEAAAAC/insane-fast-typing-cat.gif" class="hero-gif" alt="cat typing">
+</section>
 
-    <!-- STAGE 3: THE REVEAL -->
-    <div id="stage3" class="hidden-stage text-center space-y-8 max-w-xl">
-        <div class="p-8 rounded-full bg-rose-500/10 border-4 border-rose-500 inline-block animate-bounce">
-            <span class="text-9xl">🌹</span>
-        </div>
-        <h1 class="bungee text-5xl text-white glitch-text">HAPPY ROSE DAY!</h1>
-        <div class="bg-white text-black p-8 rounded-3xl shadow-[10px_10px_0px_#ff0055] text-left">
-            <p class="text-2xl font-bold mb-4 bungee text-rose-600">MISSION LOG:</p>
-            <ul class="space-y-3 text-lg">
-                <li>✅ Target identified (Absolute 10/10)</li>
-                <li>✅ Rose forged with high-intensity clicking</li>
-                <li>✅ Emotional payload delivered</li>
-            </ul>
-            <hr class="my-6 border-zinc-200">
-            <p class="text-xl leading-relaxed italic">
-                "I couldn't just send a normal text because you're anything but normal. You're the chaotic energy I need in my life. Happy Rose Day, my favorite bauni badmosh!"
-            </p>
-        </div>
-        
-        <div class="flex flex-wrap justify-center gap-4">
-            <button onclick="showerRoses()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition-transform hover:scale-110">
-                DEPLOY ROSE RAIN ⛈️
-            </button>
-            <button onclick="playMusic()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full transition-transform hover:scale-110">
-                ACTIVATE PARTY VIBES 🔊
-            </button>
-        </div>
-    </div>
+<!-- REASONS -->
+<div class="reasons">
+<div class="reasons-header">
+<p class="section-label">exhibit a through e</p>
+<h2>Why We're a Terrifyingly Great Match</h2>
+</div>
 
-    <!-- MESSAGES OVERLAY -->
-    <div id="toast-container" class="fixed bottom-4 right-4 z-[100] space-y-2 pointer-events-none"></div>
+<div class="reason">
+<span class="reason-num">01</span>
+<div>
+<h3>You Are Officially Blind 🫣</h3>
+<p>Let's address the elephant in the room. Almost every photo of yours has your eyes closed. Every. Single. One. At this point it's not a coincidence, it's a lifestyle choice. So naturally, you need someone to be your vision to the world. That's me. I see things. I point at things. I'll describe sunsets to you while you blink through them. Perfect arrangement, really.</p>
+<span class="tag">medical necessity</span>
+<br>
+<img src="https://media1.tenor.com/m/Rl__4knO7MoAAAAC/sleepy-cat.gif" class="cat-gif" alt="sleepy cat eyes closed">
+</div>
+</div>
 
-    <script>
-        let clickCount = 0;
-        const targetClicks = 25;
-        const noBtn = document.getElementById('noBtn');
+<div class="reason">
+<span class="reason-num">02</span>
+<div>
+<h3>We're Great at Playing 😏</h3>
+<p>The banter between us? Unmatched. We tease each other like it's a professional sport. You throw shade, I throw it right back. Sure, you lose most of the time, but you give a great fight. The comebacks, the dramatic reactions, the fake offence. It's honestly elite entertainment. Not everyone can keep up with this level of chaos. We can.</p>
+<span class="tag">banter level: elite</span>
+</div>
+</div>
 
-        // Background Animation
-        const canvas = document.getElementById('rose-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+<div class="reason">
+<span class="reason-num">03</span>
+<div>
+<h3>Tiny But Mighty Energy ⚡</h3>
+<p>Bauni by height, but a giant by heart. You carry the world in your pocket-sized frame, and honestly, you carry my whole heart too. There's enough energy in that small body to power a city. Scientists should study you. Until then, I'll just stand next to you and enjoy the chaos.</p>
+<span class="tag">compact powerhouse</span>
+<br>
+<img src="https://media1.tenor.com/m/7rSj5r2bpVoAAAAC/small-angry-cat.gif" class="cat-gif" alt="tiny angry cat">
+</div>
+</div>
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+<div class="reason">
+<span class="reason-num">04</span>
+<div>
+<h3>Consistent, Caring & Curious 🌱</h3>
+<p>Here's the real one. It's like we both put a little bit of effort daily to make this thing flourish. Not grand gestures, not movie-style drama, just small, steady, everyday care. Like watering a plant together. And honestly? The plant is growing. And I think it's going to turn into something really, really beautiful.</p>
+<span class="tag">long-term investment 📈</span>
+<br>
+<img src="https://media1.tenor.com/m/aLwghy4wtigAAAAC/cat-watering-the-plants.gif" class="cat-gif" alt="cat watering plants">
+</div>
+</div>
 
-        window.addEventListener('resize', resize);
-        resize();
+<div class="reason">
+<span class="reason-num">05</span>
+<div>
+<h3>Somebody's Gotta Adopt You 🏠</h3>
+<p>Let's be real. You're basically a stray cat. Chaotic, unpredictable, occasionally scratches, but unbearably cute. Somebody has to take responsibility here. Might as well be me. I've already cat-proofed my life. Consider this your official adoption notice.</p>
+<span class="tag">adoption papers: filed ✅</span>
+<br>
+<img src="https://media1.tenor.com/m/MPaAyN53si8AAAAC/cat-cute.gif" class="cat-gif" alt="cute stray cat">
+</div>
+</div>
+</div>
 
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                this.color = `rgba(255, ${Math.random() * 50}, ${Math.random() * 100 + 50}, ${Math.random()})`;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-                    this.reset();
-                }
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+<!-- PROMISE -->
+<section class="promise-section">
+<p class="section-label">the fine print</p>
+<h2>My Promise To You</h2>
+<p class="promise-text">
+I promise to only and <em>only</em> choose you. To annoy.<br><br>
+Whether it's a difficult day, through your chaotic life, or the happiest day after a while, I'll always be there to <em>pinch you</em>, to sing like a <em>mosquito in your ear</em>, be the <em>invisible itch</em> you can never quite scratch, and your favourite <em>annoying headache</em>.<br><br>
+No refunds. No exchanges. No escape. 🐱
+</p>
+<img src="https://media1.tenor.com/m/0SEjS-KLVHgAAAAC/clingy-cat.gif" class="promise-cat" alt="clingy cat">
+</section>
 
-        for (let i = 0; i < 50; i++) particles.push(new Particle());
+<!-- QUESTION -->
+<section class="question">
+<p class="section-label">the actual question</p>
+<h2>So, Bauni Badmash...</h2>
+<p class="subtitle">Will you say yes to the Annoyance Subscription™?</p>
+<p class="fine-print">(refundable, but like, only till you actually want the refund. terms & conditions are vibes-based.)<br>Or you're totally free to say no and chill out. No pressure. Okay maybe a little pressure.</p>
 
-        function animate() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
+<div class="btn-group">
+<button class="btn-yes" onclick="sayYes()">Yes, Subscribe Me 🐱</button>
+<button class="btn-no" id="noBtn">Nah, I'll chill</button>
+</div>
+</section>
 
-        // Game Logic
-        function verify(isCutie) {
-            if (isCutie) {
-                showToast("Identity Confirmed: Level 100 Cutie Detected");
-                document.getElementById('stage1').classList.add('hidden-stage');
-                document.getElementById('stage2').classList.remove('hidden-stage');
-            }
-        }
+<footer>
+<p>filed with love & mild insanity 💌</p>
+<span class="small">propose day 2026 · no cats were harmed</span>
+</footer>
+</div>
 
-        function moveButton() {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-            showToast("ERROR: Access Denied to Non-Cuties", "bg-red-500");
-        }
+<!-- CELEBRATION -->
+<div class="celebration" id="celebration">
+<canvas id="confetti-canvas"></canvas>
+<h1>She <span>subscribed!</span> 🎉</h1>
+<p>Annoyance subscription: activated. No cancellation policy. You're stuck with me now, Bauni Badmash. And honestly? Best decision you've ever made with your eyes closed.</p>
+<img src="https://media1.tenor.com/m/T1sBNd96qZ0AAAAC/cat-party.gif" class="cat-celebrate" alt="celebrating cat">
+</div>
 
-        function hitRose() {
-            clickCount++;
-            const progress = (clickCount / targetClicks) * 100;
-            const preview = document.getElementById('rose-preview');
-            const progressBar = document.getElementById('progress-bar');
-            const status = document.getElementById('status-text');
+<script>
+// ===== ENVELOPE =====
+function openEnvelope(){
+const l=document.getElementById('landing'),m=document.getElementById('mainContent');
+l.style.transition='opacity 0.8s ease,transform 0.8s ease';
+l.style.opacity='0';l.style.transform='scale(0.95)';
+setTimeout(()=>{l.style.display='none';m.style.display='block';
+requestAnimationFrame(()=>{m.style.opacity='1'})},800);
+}
 
-            // Visual feedback
-            preview.style.transform = `scale(${1 + clickCount * 0.05}) rotate(${clickCount * 10}deg)`;
-            progressBar.style.width = `${progress}%`;
-            
-            // Stages of rose
-            if (clickCount < 5) {
-                preview.innerText = '🥀';
-                status.innerText = "ROSE QUALITY: DRY STICK";
-            } else if (clickCount < 10) {
-                preview.innerText = '🌱';
-                status.innerText = "ROSE QUALITY: WEIRD WEED";
-            } else if (clickCount < 15) {
-                preview.innerText = '🌷';
-                status.innerText = "ROSE QUALITY: ALMOST THERE";
-            } else if (clickCount < 20) {
-                preview.innerText = '🌹';
-                status.innerText = "ROSE QUALITY: MAXIMUM BEAUTY";
-                preview.classList.add('shake');
-            }
+// ===== SCROLL REVEAL =====
+const obs=new IntersectionObserver(entries=>{
+entries.forEach((e,i)=>{
+if(e.isIntersecting){
+e.target.style.transitionDelay=(i*0.1)+'s';
+e.target.classList.add('in-view');
+}
+});
+},{threshold:0.15});
+document.querySelectorAll('.reason').forEach((r,i)=>{
+r.style.transitionDelay=(i*0.12)+'s';
+obs.observe(r);
+});
 
-            if (clickCount >= targetClicks) {
-                showToast("MAXIMUM LOVE ACHIEVED!", "bg-rose-600");
-                setTimeout(() => {
-                    document.getElementById('stage2').classList.add('hidden-stage');
-                    document.getElementById('stage3').classList.remove('hidden-stage');
-                    showerRoses();
-                }, 500);
-            }
-        }
+// ===== NO BUTTON =====
+const noBtn=document.getElementById('noBtn');
+let noCount=0;
+const noTexts=["lol nice try 😂","wrong button bestie","this one's broken, try the other","you really thought? 🐱","i'll wait...","okay press it again i dare you"];
+noBtn.addEventListener('mouseover',function(){
+noCount++;
+this.textContent=noTexts[Math.min(noCount-1,noTexts.length-1)];
+if(noCount>1){
+const x=Math.random()*(window.innerWidth-180);
+const y=Math.random()*(window.innerHeight-60);
+this.style.position='fixed';this.style.left=x+'px';this.style.top=y+'px';this.style.zIndex='50';
+}
+});
+noBtn.addEventListener('click',function(){this.textContent="bruh. just press yes. 😭"});
 
-        function showToast(text, color = "bg-rose-500") {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `${color} text-white px-4 py-2 rounded-lg shadow-lg font-bold animate-bounce text-sm`;
-            toast.innerText = text;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
-
-        function showerRoses() {
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const rose = document.createElement('div');
-                    rose.className = 'floating-rose text-3xl';
-                    rose.innerText = i % 2 === 0 ? '🌹' : '💖';
-                    rose.style.left = Math.random() * 100 + 'vw';
-                    rose.style.top = '-50px';
-                    rose.style.transition = `all ${Math.random() * 2 + 3}s linear`;
-                    document.body.appendChild(rose);
-                    
-                    setTimeout(() => {
-                        rose.style.top = '110vh';
-                        rose.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    }, 100);
-
-                    setTimeout(() => rose.remove(), 5000);
-                }, i * 100);
-            }
-        }
-
-        function playMusic() {
-            // Using Web Audio API to generate a "happy" beep since we can't load external MP3s easily
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-            
-            notes.forEach((freq, i) => {
-                setTimeout(() => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.5);
-                    showToast("🎶 Doot!", "bg-emerald-500");
-                }, i * 150);
-            });
-            
-            document.body.classList.add('shake');
-            setTimeout(() => document.body.classList.remove('shake'), 500);
-        }
-    </script>
+// ===== CELEBRATION =====
+function sayYes(){
+document.getElementById('celebration').classList.add('active');
+launchConfetti();
+}
+function launchConfetti(){
+const cc=document.getElementById('confetti-canvas'),ctx=cc.getContext('2d');
+cc.width=window.innerWidth;cc.height=window.innerHeight;
+let particles=[];
+const colors=['#e07850','#d4a574','#f0ebe4','#3d3530','#c9825a','#f5c6a0','#8a8580'];
+for(let i=0;i<160;i++){
+particles.push({x:cc.width/2,y:cc.height/2,
+vx:(Math.random()-0.5)*14,vy:Math.random()*-14-4,
+size:3+Math.random()*7,
+color:colors[Math.floor(Math.random()*colors.length)],
+rot:Math.random()*360,rotV:(Math.random()-0.5)*8,
+gravity:0.22+Math.random()*0.08,opacity:1,
+shape:Math.random()>0.4?'rect':'circle'});
+}
+(function anim(){
+ctx.clearRect(0,0,cc.width,cc.height);let alive=false;
+particles.forEach(p=>{
+p.vy+=p.gravity;p.x+=p.vx;p.y+=p.vy;
+p.rot+=p.rotV;p.opacity-=0.004;p.vx*=0.99;
+if(p.opacity>0){alive=true;ctx.save();ctx.translate(p.x,p.y);
+ctx.rotate(p.rot*Math.PI/180);ctx.globalAlpha=Math.max(0,p.opacity);
+ctx.fillStyle=p.color;
+if(p.shape==='rect')ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+else{ctx.beginPath();ctx.arc(0,0,p.size/2,0,Math.PI*2);ctx.fill()}
+ctx.restore()}});
+if(alive)requestAnimationFrame(anim);
+})();
+}
+</script>
 </body>
 </html>
